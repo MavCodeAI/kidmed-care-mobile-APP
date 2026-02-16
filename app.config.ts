@@ -4,23 +4,7 @@ import type { ExpoConfig } from "expo/config";
 
 // Bundle ID format: space.manus.<project_name_dots>.<timestamp>
 // e.g., "my-app" created at 2024-01-15 10:30:45 -> "space.manus.my.app.t20240115103045"
-// Bundle ID can only contain letters, numbers, and dots
-// Android requires each dot-separated segment to start with a letter
-const rawBundleId = "space.manus.kidmed.care.t20260216115908";
-const bundleId =
-  rawBundleId
-    .replace(/[-_]/g, ".") // Replace hyphens/underscores with dots
-    .replace(/[^a-zA-Z0-9.]/g, "") // Remove invalid chars
-    .replace(/\.+/g, ".") // Collapse consecutive dots
-    .replace(/^\.+|\.+$/g, "") // Trim leading/trailing dots
-    .toLowerCase()
-    .split(".")
-    .map((segment) => {
-      // Android requires each segment to start with a letter
-      // Prefix with 'x' if segment starts with a digit
-      return /^[a-zA-Z]/.test(segment) ? segment : "x" + segment;
-    })
-    .join(".") || "space.manus.app";
+const bundleId = "space.manus.kidmed.care.t20260216120000";
 // Extract timestamp from bundle ID and prefix with "manus" for deep link scheme
 // e.g., "space.manus.my.app.t20240115103045" -> "manus20240115103045"
 const timestamp = bundleId.split(".").pop()?.replace(/^t/, "") ?? "";
@@ -32,7 +16,7 @@ const env = {
   appSlug: "kidmed-care",
   // S3 URL of the app logo - set this to the URL returned by generate_image when creating custom logo
   // Leave empty to use the default icon from assets/images/icon.png
-  logoUrl: "",
+  logoUrl: "https://private-us-east-1.manuscdn.com/sessionFile/pM5gjIEm0Qd48BgThC5bFN/sandbox/atZxnIAhY8RAXBjBjUqMIJ-img-1_1771261230000_na1fn_aWNvbg.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvcE01Z2pJRW0wUWQ0OEJnVGhDNWJGTi9zYW5kYm94L2F0WnhuSUFoWThSQVhCakJqVXFNSUotaW1nLTFfMTc3MTI2MTIzMDAwMF9uYTFmbl9hV052YmcucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=UCxzyCu1MhUfhw4CiOONgJfsECsIBjibaeMabVhQzRnzfoQf~-NNP1cTtOE2GlhSyXoGBBTcPok726I9YY11T6tcFtkKL-aSWx1mg869JvXBSU9yCRo55stmhMVMe~0-kZtBQZRa3tXSy535RwMdUTC0snaGTnAVDL7ljNBPsbHeUoAX4bNTx82UR72QjDJHWFrDHyTgXFVtYIwiSS2jowAWKjwlnOV4-XfNCZyuaB8QYW4oFKo2WR2ELb-erNMe6xGZ0cu-Uj9ybi-rTWm~UwjDNWbCJ1qquZjhffdYA64zubitkPsyVoGhmrEvS3ckoQ7QhBCoaDUIfXsSsnA3PQ__",
   scheme: schemeFromBundleId,
   iosBundleId: bundleId,
   androidPackage: bundleId,
@@ -50,9 +34,6 @@ const config: ExpoConfig = {
   ios: {
     supportsTablet: true,
     bundleIdentifier: env.iosBundleId,
-    "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
-      }
   },
   android: {
     adaptiveIcon: {
@@ -116,7 +97,6 @@ const config: ExpoConfig = {
       {
         android: {
           buildArchs: ["armeabi-v7a", "arm64-v8a"],
-          minSdkVersion: 24,
         },
       },
     ],
