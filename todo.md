@@ -65,12 +65,12 @@
 - [ ] Build Drug Dosing Calculator tool
 
 ## Phase 8: Patient Case Management
-- [ ] Create patient list screen
-- [ ] Implement patient search and filtering
-- [ ] Build add patient form
-- [ ] Create patient detail screen
+- [x] Create patient list screen
+- [x] Implement patient search and filtering
+- [x] Build add patient form
+- [x] Create patient detail screen
 - [ ] Implement patient history timeline
-- [ ] Add clinical notes functionality
+- [x] Add clinical notes functionality
 - [ ] Create case status management
 - [ ] Implement patient data export
 

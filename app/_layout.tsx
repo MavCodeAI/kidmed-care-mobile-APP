@@ -22,6 +22,7 @@ import { AuthProvider, useAuth } from "@/lib/auth-context";
 import { SubscriptionProvider } from "@/lib/subscription-context";
 import { AIGuidanceProvider } from "@/lib/ai-guidance-context";
 import { ClinicalToolsProvider } from "@/lib/clinical-tools-context";
+import { PatientProvider } from "@/lib/patient-context";
 
 const DEFAULT_WEB_INSETS: EdgeInsets = { top: 0, right: 0, bottom: 0, left: 0 };
 const DEFAULT_WEB_FRAME: Rect = { x: 0, y: 0, width: 0, height: 0 };
@@ -117,7 +118,9 @@ export default function RootLayout() {
             <SubscriptionProvider>
               <AIGuidanceProvider>
                 <ClinicalToolsProvider>
-                  <RootNavigator />
+                  <PatientProvider>
+                    <RootNavigator />
+                  </PatientProvider>
                 </ClinicalToolsProvider>
               </AIGuidanceProvider>
             </SubscriptionProvider>
