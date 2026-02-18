@@ -46,6 +46,19 @@ export default function HomeScreen() {
             </View>
           </View>
 
+          {/* AI Insights Card */}
+          <View className="bg-primary/10 border border-primary rounded-xl p-4 gap-3">
+            <View className="flex-row justify-between items-center">
+              <View>
+                <Text className="text-sm font-semibold text-foreground">AI Clinical Guidance</Text>
+                <Text className="text-xs text-muted mt-1">Evidence-based recommendations</Text>
+              </View>
+              <TouchableOpacity className="bg-primary px-4 py-2 rounded-lg active:opacity-80">
+                <Text className="text-white text-xs font-semibold">Access</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
           {/* Subscription Status */}
           <View className="bg-surface rounded-xl p-4 border border-border gap-3">
             <View className="flex-row justify-between items-center">
