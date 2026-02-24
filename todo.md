@@ -57,8 +57,8 @@
 
 ## Phase 7: Clinical Tools Implementation (Part 2)
 - [x] Build ASD Screening (M-CHAT) tool
-- [ ] Build Catch-up Vaccination tool
-- [ ] Build Critical Values Guide tool
+- [x] Build Catch-up Vaccination tool
+- [x] Build Critical Values Guide tool
 - [ ] Build Urgent Care Protocols tool
 - [ ] Build Patient Handouts tool
 - [x] Build Pain Assessment tool
@@ -197,3 +197,12 @@
 - [ ] Create growth velocity calculator
 - [ ] Add growth trend analysis
 - [ ] Implement chart export functionality
+
+
+## Dark Mode Implementation (NEW)
+- [x] Create dark mode context and provider
+- [x] Add DarkModeProvider to root layout
+- [ ] Apply dark mode styling to all screens
+- [ ] Add dark mode toggle button to profile screen
+- [ ] Persist dark mode preference to AsyncStorage
+- [ ] Test dark mode across all screens
