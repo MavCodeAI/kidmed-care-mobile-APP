@@ -22,10 +22,10 @@
 - [x] Create subscription tier system (Free, Pro, Clinic)
 - [x] Implement subscription management screen
 - [ ] Add payment gateway integration
-- [ ] Create upgrade/downgrade flow
+- [x] Create upgrade/downgrade flow
 - [x] Implement subscription status display
 - [x] Add feature gating based on subscription tier
-- [ ] Create billing history screen
+- [x] Create billing history screen
 - [ ] Add invoice generation and download
 
 ## Phase 4: Core Navigation & Home Screen
@@ -49,20 +49,20 @@
 
 ## Phase 6: Clinical Tools Implementation (Part 1)
 - [x] Build BMI Calculator tool
-- [ ] Build Growth Charts tool (WHO/CDC percentiles)
-- [ ] Build Vaccine Scheduler tool
-- [ ] Build Developmental Milestones tool
+- [x] Build Growth Charts tool (WHO/CDC percentiles)
+- [x] Build Vaccine Scheduler tool
+- [x] Build Developmental Milestones tool
 - [x] Build Lab Values Reference tool
 - [x] Build Vital Signs Reference tool
 
 ## Phase 7: Clinical Tools Implementation (Part 2)
-- [ ] Build ASD Screening (M-CHAT) tool
+- [x] Build ASD Screening (M-CHAT) tool
 - [ ] Build Catch-up Vaccination tool
 - [ ] Build Critical Values Guide tool
 - [ ] Build Urgent Care Protocols tool
 - [ ] Build Patient Handouts tool
-- [ ] Build Pain Assessment tool
-- [ ] Build Drug Dosing Calculator tool
+- [x] Build Pain Assessment tool
+- [x] Build Drug Dosing Calculator tool
 
 ## Phase 8: Patient Case Management
 - [x] Create patient list screen
