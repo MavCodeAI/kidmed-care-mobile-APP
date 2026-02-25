@@ -24,6 +24,7 @@ import { AIGuidanceProvider } from "@/lib/ai-guidance-context";
 import { ClinicalToolsProvider } from "@/lib/clinical-tools-context";
 import { PatientProvider } from "@/lib/patient-context";
 import { DarkModeProvider } from "@/lib/dark-mode-context";
+import { PaymentProvider } from "@/lib/payment-context";
 
 const DEFAULT_WEB_INSETS: EdgeInsets = { top: 0, right: 0, bottom: 0, left: 0 };
 const DEFAULT_WEB_FRAME: Rect = { x: 0, y: 0, width: 0, height: 0 };
@@ -118,13 +119,15 @@ export default function RootLayout() {
           <QueryClientProvider client={queryClient}>
             <AuthProvider>
               <SubscriptionProvider>
-                <AIGuidanceProvider>
-                  <ClinicalToolsProvider>
-                    <PatientProvider>
-                      <RootNavigator />
-                    </PatientProvider>
-                  </ClinicalToolsProvider>
-                </AIGuidanceProvider>
+                <PaymentProvider>
+                  <AIGuidanceProvider>
+                    <ClinicalToolsProvider>
+                      <PatientProvider>
+                        <RootNavigator />
+                      </PatientProvider>
+                    </ClinicalToolsProvider>
+                  </AIGuidanceProvider>
+                </PaymentProvider>
               </SubscriptionProvider>
             </AuthProvider>
             <StatusBar style="auto" />

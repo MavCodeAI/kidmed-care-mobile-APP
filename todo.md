@@ -206,3 +206,11 @@
 - [ ] Add dark mode toggle button to profile screen
 - [ ] Persist dark mode preference to AsyncStorage
 - [ ] Test dark mode across all screens
+
+## Backend Integration (Mock Data)
+- [x] Create Supabase client service with mock data
+- [x] Create Stripe payment service with mock transactions
+- [x] Integrate patient data persistence to mock Supabase
+- [x] Integrate subscription data to mock Supabase
+- [x] Implement payment flow with mock Stripe
+- [x] Add success/error handling for mock transactions
