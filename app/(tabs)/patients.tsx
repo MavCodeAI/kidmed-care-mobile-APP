@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, TouchableOpacity, TextInput } from "react-native";
+import { ScrollView, Text, View, Pressable, TextInput } from "react-native";
 import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
@@ -19,13 +19,14 @@ export default function PatientsScreen() {
   }, [searchQuery, patients]);
 
   const handleAddPatient = () => {
-    // Navigate to add patient screen - will create this route
-    alert("Add patient feature coming soon");
+    router.push("/add-patient" as any);
   };
 
   const handlePatientPress = (patientId: string) => {
-    // Navigate to patient detail screen - will create this route
-    alert(`Patient ${patientId} details coming soon`);
+    router.push({
+      pathname: "/patient-detail",
+      params: { id: patientId },
+    } as any);
   };
 
   const getAgeString = (dob: string) => {
@@ -49,12 +50,19 @@ export default function PatientsScreen() {
               <Text className="text-2xl font-bold text-foreground">Patients</Text>
               <Text className="text-sm text-muted">{filteredPatients.length} active patients</Text>
             </View>
-            <TouchableOpacity
-              className="bg-primary rounded-full p-3 active:opacity-80"
+            <Pressable
               onPress={handleAddPatient}
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed ? "#0a6a8f" : "#0a7ea4",
+                  borderRadius: 50,
+                  padding: 12,
+                  opacity: pressed ? 0.8 : 1,
+                },
+              ]}
             >
               <Text className="text-white text-xl font-bold">+</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           {/* Search Bar */}
@@ -73,63 +81,59 @@ export default function PatientsScreen() {
           {filteredPatients.length > 0 ? (
             <View className="gap-3">
               {filteredPatients.map((patient) => (
-                <TouchableOpacity
+                <Pressable
                   key={patient.id}
-                  className="bg-surface rounded-lg border border-border p-4 active:opacity-80"
                   onPress={() => handlePatientPress(patient.id)}
+                  style={({ pressed }) => [
+                    {
+                      backgroundColor: pressed ? "#e8e8e8" : "#f5f5f5",
+                      borderRadius: 12,
+                      padding: 16,
+                      borderWidth: 1,
+                      borderColor: "#E5E7EB",
+                      opacity: pressed ? 0.7 : 1,
+                    },
+                  ]}
                 >
-                  <View className="flex-row items-start justify-between">
-                    {/* Patient Info */}
-                    <View className="flex-1 gap-2">
-                      <Text className="text-base font-semibold text-foreground">{patient.name}</Text>
-                      <View className="flex-row items-center gap-2">
-                        <View className="bg-primary/20 rounded px-2 py-1">
-                          <Text className="text-xs font-semibold text-primary">
-                            {getAgeString(patient.dateOfBirth)} yrs • {patient.gender === "M" ? "Boy" : "Girl"}
-                          </Text>
-                        </View>
-                        <Text className="text-xs text-muted">DOB: {patient.dateOfBirth}</Text>
-                      </View>
-                      <Text className="text-xs text-muted">Parent: {patient.parentName}</Text>
-                      {patient.lastVisit && (
-                        <Text className="text-xs text-muted">Last visit: {patient.lastVisit}</Text>
-                      )}
+                  <View className="flex-row justify-between items-start">
+                    <View className="flex-1">
+                      <Text className="text-base font-semibold text-foreground">
+                        {patient.name}
+                      </Text>
+                      <Text className="text-xs text-muted mt-1">
+                        Age: {getAgeString(patient.dateOfBirth)} | {patient.gender}
+                      </Text>
+                      <Text className="text-xs text-muted mt-1">
+                        Parent: {patient.parentName}
+                      </Text>
                     </View>
-
-                    {/* Notes Count */}
-                    <View className="items-center justify-center bg-primary/10 rounded-lg p-2 min-w-12">
-                      <Text className="text-sm font-bold text-primary">{patient.notes.length}</Text>
-                      <Text className="text-xs text-muted">notes</Text>
-                    </View>
+                    <Text className="text-lg">→</Text>
                   </View>
-                </TouchableOpacity>
+                </Pressable>
               ))}
             </View>
           ) : (
-            <View className="bg-surface rounded-lg border border-border p-8 items-center justify-center gap-3">
-              <Text className="text-2xl">👶</Text>
-              <Text className="text-sm font-semibold text-foreground">No Patients Yet</Text>
-              <Text className="text-xs text-muted text-center">
-                {searchQuery ? "No patients match your search" : "Add your first patient to get started"}
+            <View className="bg-surface rounded-xl border border-border p-8 items-center justify-center gap-3">
+              <Text className="text-lg font-semibold text-foreground">No Patients Yet</Text>
+              <Text className="text-sm text-muted text-center">
+                Add your first patient to get started with clinical assessments
               </Text>
-              {!searchQuery && (
-                <TouchableOpacity
-                  className="bg-primary rounded-lg px-4 py-2 mt-2 active:opacity-80"
-                  onPress={handleAddPatient}
-                >
-                  <Text className="text-white text-sm font-semibold">Add Patient</Text>
-                </TouchableOpacity>
-              )}
+              <Pressable
+                onPress={handleAddPatient}
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed ? "#0a6a8f" : "#0a7ea4",
+                    borderRadius: 8,
+                    paddingHorizontal: 24,
+                    paddingVertical: 12,
+                    opacity: pressed ? 0.8 : 1,
+                  },
+                ]}
+              >
+                <Text className="text-white text-sm font-semibold">Add Patient</Text>
+              </Pressable>
             </View>
           )}
-
-          {/* Info Card */}
-          <View className="bg-primary/10 border border-primary rounded-lg p-4 gap-2">
-            <Text className="text-xs font-semibold text-primary">PATIENT MANAGEMENT</Text>
-            <Text className="text-xs text-muted">
-              Tap a patient to view details, add clinical notes, and track medical history. All patient data is securely stored locally.
-            </Text>
-          </View>
         </View>
       </ScrollView>
     </ScreenContainer>

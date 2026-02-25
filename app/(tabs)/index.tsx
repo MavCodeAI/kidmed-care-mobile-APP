@@ -1,14 +1,17 @@
-import { ScrollView, Text, View, TouchableOpacity } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, Pressable } from "react-native";
+import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 
 const CLINICAL_TOOLS = [
-  { id: "1", name: "BMI Calculator", category: "Assessment" },
-  { id: "2", name: "Growth Charts", category: "Reference" },
-  { id: "3", name: "Vaccine Scheduler", category: "Assessment" },
-  { id: "4", name: "Dev Milestones", category: "Reference" },
+  { id: "1", name: "BMI Calculator", route: "/tools/bmi-calculator" },
+  { id: "2", name: "Growth Charts", route: "/tools/growth-charts" },
+  { id: "3", name: "Vaccine Scheduler", route: "/tools/vaccine-scheduler" },
+  { id: "4", name: "Dev Milestones", route: "/tools/developmental-milestones" },
 ];
 
 export default function HomeScreen() {
+  const router = useRouter();
+
   return (
     <ScreenContainer className="bg-background">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
@@ -36,12 +39,24 @@ export default function HomeScreen() {
             <Text className="text-lg font-semibold text-foreground">Quick Access</Text>
             <View className="flex-row flex-wrap gap-2">
               {CLINICAL_TOOLS.map((tool) => (
-                <TouchableOpacity
+                <Pressable
                   key={tool.id}
-                  className="flex-1 min-w-[45%] bg-primary rounded-lg p-3 active:opacity-80"
+                  onPress={() => router.push(tool.route as any)}
+                  style={({ pressed }) => [
+                    {
+                      flex: 1,
+                      minWidth: "45%",
+                      backgroundColor: pressed ? "#0a6a8f" : "#0a7ea4",
+                      borderRadius: 8,
+                      padding: 12,
+                      opacity: pressed ? 0.8 : 1,
+                    },
+                  ]}
                 >
-                  <Text className="text-white text-xs font-semibold text-center">{tool.name}</Text>
-                </TouchableOpacity>
+                  <Text className="text-white text-xs font-semibold text-center">
+                    {tool.name}
+                  </Text>
+                </Pressable>
               ))}
             </View>
           </View>
@@ -50,12 +65,27 @@ export default function HomeScreen() {
           <View className="bg-primary/10 border border-primary rounded-xl p-4 gap-3">
             <View className="flex-row justify-between items-center">
               <View>
-                <Text className="text-sm font-semibold text-foreground">AI Clinical Guidance</Text>
-                <Text className="text-xs text-muted mt-1">Evidence-based recommendations</Text>
+                <Text className="text-sm font-semibold text-foreground">
+                  AI Clinical Guidance
+                </Text>
+                <Text className="text-xs text-muted mt-1">
+                  Evidence-based recommendations
+                </Text>
               </View>
-              <TouchableOpacity className="bg-primary px-4 py-2 rounded-lg active:opacity-80">
+              <Pressable
+                onPress={() => router.push("/ai-guidance" as any)}
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed ? "#0a6a8f" : "#0a7ea4",
+                    paddingHorizontal: 16,
+                    paddingVertical: 8,
+                    borderRadius: 8,
+                    opacity: pressed ? 0.8 : 1,
+                  },
+                ]}
+              >
                 <Text className="text-white text-xs font-semibold">Access</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
 
@@ -66,18 +96,64 @@ export default function HomeScreen() {
                 <Text className="text-sm font-semibold text-foreground">Free Plan</Text>
                 <Text className="text-xs text-muted mt-1">Upgrade to unlock all tools</Text>
               </View>
-              <TouchableOpacity className="bg-primary px-4 py-2 rounded-lg active:opacity-80">
+              <Pressable
+                onPress={() => router.push("/subscription-management" as any)}
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed ? "#0a6a8f" : "#0a7ea4",
+                    paddingHorizontal: 16,
+                    paddingVertical: 8,
+                    borderRadius: 8,
+                    opacity: pressed ? 0.8 : 1,
+                  },
+                ]}
+              >
                 <Text className="text-white text-xs font-semibold">Upgrade</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
 
           {/* Recent Patients */}
           <View className="gap-3">
             <Text className="text-lg font-semibold text-foreground">Recent Patients</Text>
-            <View className="bg-surface rounded-xl p-4 border border-border items-center justify-center py-8">
+            <Pressable
+              onPress={() => router.push("/(tabs)/patients" as any)}
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed ? "#f5f5f5" : "#ffffff",
+                  borderRadius: 12,
+                  padding: 16,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingVertical: 32,
+                  borderWidth: 1,
+                  borderColor: "#E5E7EB",
+                  opacity: pressed ? 0.7 : 1,
+                },
+              ]}
+            >
               <Text className="text-sm text-muted">No patients yet</Text>
-            </View>
+              <Text className="text-xs text-muted mt-2">Tap to add a patient</Text>
+            </Pressable>
+          </View>
+
+          {/* Tools Hub */}
+          <View className="gap-3">
+            <Text className="text-lg font-semibold text-foreground">All Tools</Text>
+            <Pressable
+              onPress={() => router.push("/tools-hub" as any)}
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed ? "#0a6a8f" : "#0a7ea4",
+                  borderRadius: 12,
+                  padding: 16,
+                  alignItems: "center",
+                  opacity: pressed ? 0.8 : 1,
+                },
+              ]}
+            >
+              <Text className="text-white text-sm font-semibold">Browse All Clinical Tools</Text>
+            </Pressable>
           </View>
         </View>
       </ScrollView>
