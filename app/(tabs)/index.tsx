@@ -9,6 +9,13 @@ const CLINICAL_TOOLS = [
   { id: "4", name: "Dev Milestones", route: "/tools/developmental-milestones" },
 ];
 
+const FEATURES = [
+  { id: "1", name: "💬 Messaging", route: "/messaging" },
+  { id: "2", name: "👥 Workspace", route: "/workspace-management" },
+  { id: "3", name: "📊 Analytics", route: "/analytics-dashboard" },
+  { id: "4", name: "🔄 Offline & Sync", route: "/offline-sync" },
+];
+
 export default function HomeScreen() {
   const router = useRouter();
 
@@ -55,6 +62,33 @@ export default function HomeScreen() {
                 >
                   <Text className="text-white text-xs font-semibold text-center">
                     {tool.name}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          </View>
+
+          {/* Features Access */}
+          <View className="gap-3">
+            <Text className="text-lg font-semibold text-foreground">Features</Text>
+            <View className="flex-row flex-wrap gap-2">
+              {FEATURES.map((feature) => (
+                <Pressable
+                  key={feature.id}
+                  onPress={() => router.push(feature.route as any)}
+                  style={({ pressed }) => [
+                    {
+                      flex: 1,
+                      minWidth: "45%",
+                      backgroundColor: pressed ? "#059669" : "#10b981",
+                      borderRadius: 8,
+                      padding: 12,
+                      opacity: pressed ? 0.8 : 1,
+                    },
+                  ]}
+                >
+                  <Text className="text-white text-xs font-semibold text-center">
+                    {feature.name}
                   </Text>
                 </Pressable>
               ))}
