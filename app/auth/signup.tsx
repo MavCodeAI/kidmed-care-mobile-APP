@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useRouter, Link } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { useAuth } from "@/lib/auth-context";
+import { useColors } from "@/hooks/use-colors";
 
 export default function SignupScreen() {
   const router = useRouter();
   const { signup } = useAuth();
+  const colors = useColors();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -56,11 +58,14 @@ export default function SignupScreen() {
             <TextInput
               className="bg-surface border border-border rounded-lg p-4 text-foreground"
               placeholder="Dr. Jane Smith"
-              placeholderTextColor="#687076"
+              placeholderTextColor={colors.muted}
               value={name}
               onChangeText={setName}
               editable={!isLoading}
               autoCapitalize="words"
+              accessibilityLabel="Full name"
+              accessibilityHint="Enter your full name"
+              autoComplete="name"
             />
           </View>
 
@@ -70,12 +75,15 @@ export default function SignupScreen() {
             <TextInput
               className="bg-surface border border-border rounded-lg p-4 text-foreground"
               placeholder="your@email.com"
-              placeholderTextColor="#687076"
+              placeholderTextColor={colors.muted}
               value={email}
               onChangeText={setEmail}
               editable={!isLoading}
               keyboardType="email-address"
               autoCapitalize="none"
+              accessibilityLabel="Email address"
+              accessibilityHint="Enter your email address"
+              autoComplete="email"
             />
           </View>
 
@@ -85,11 +93,14 @@ export default function SignupScreen() {
             <TextInput
               className="bg-surface border border-border rounded-lg p-4 text-foreground"
               placeholder="••••••••"
-              placeholderTextColor="#687076"
+              placeholderTextColor={colors.muted}
               value={password}
               onChangeText={setPassword}
               editable={!isLoading}
               secureTextEntry
+              accessibilityLabel="Password"
+              accessibilityHint="Enter a password with at least 8 characters"
+              autoComplete="password-new"
             />
             <Text className="text-xs text-muted">At least 8 characters</Text>
           </View>
@@ -100,11 +111,14 @@ export default function SignupScreen() {
             <TextInput
               className="bg-surface border border-border rounded-lg p-4 text-foreground"
               placeholder="••••••••"
-              placeholderTextColor="#687076"
+              placeholderTextColor={colors.muted}
               value={confirmPassword}
               onChangeText={setConfirmPassword}
               editable={!isLoading}
               secureTextEntry
+              accessibilityLabel="Confirm password"
+              accessibilityHint="Re-enter your password to confirm"
+              autoComplete="password-new"
             />
           </View>
 
@@ -118,6 +132,9 @@ export default function SignupScreen() {
             className="bg-primary rounded-lg p-4 items-center active:opacity-80"
             onPress={handleSignup}
             disabled={isLoading}
+            accessibilityLabel="Create new account"
+            accessibilityRole="button"
+            accessibilityState={{ disabled: isLoading }}
           >
             <Text className="text-white font-semibold">{isLoading ? "Creating Account..." : "Create Account"}</Text>
           </TouchableOpacity>
@@ -126,7 +143,7 @@ export default function SignupScreen() {
           <View className="flex-row justify-center gap-1">
             <Text className="text-sm text-muted">Already have an account?</Text>
             <Link href="./login" asChild>
-              <TouchableOpacity disabled={isLoading}>
+              <TouchableOpacity disabled={isLoading} accessibilityLabel="Sign in to existing account" accessibilityRole="link">
                 <Text className="text-sm text-primary font-semibold">Sign In</Text>
               </TouchableOpacity>
             </Link>

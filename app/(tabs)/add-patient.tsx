@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { usePatient } from "@/lib/patient-context";
+import { useColors } from "@/hooks/use-colors";
 
 export default function AddPatientScreen() {
   const router = useRouter();
   const { addPatient } = usePatient();
+  const colors = useColors();
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -72,9 +74,12 @@ export default function AddPatientScreen() {
               <TextInput
                 className="bg-background border border-border rounded-lg p-3 text-foreground"
                 placeholder="e.g., John Doe"
-                placeholderTextColor="#687076"
+                placeholderTextColor={colors.muted}
                 value={formData.name}
                 onChangeText={(text) => setFormData({ ...formData, name: text })}
+                accessibilityLabel="Patient name"
+                accessibilityHint="Enter the patient's full name"
+                autoComplete="name"
               />
             </View>
 
@@ -84,9 +89,12 @@ export default function AddPatientScreen() {
               <TextInput
                 className="bg-background border border-border rounded-lg p-3 text-foreground"
                 placeholder="e.g., 2015-05-20"
-                placeholderTextColor="#687076"
+                placeholderTextColor={colors.muted}
                 value={formData.dateOfBirth}
                 onChangeText={(text) => setFormData({ ...formData, dateOfBirth: text })}
+                accessibilityLabel="Date of birth"
+                accessibilityHint="Enter date in YYYY-MM-DD format"
+                keyboardType="numeric"
               />
             </View>
 
@@ -101,6 +109,9 @@ export default function AddPatientScreen() {
                       formData.gender === g ? "bg-primary border-primary" : "bg-background border-border"
                     }`}
                     onPress={() => setFormData({ ...formData, gender: g as "M" | "F" })}
+                    accessibilityLabel={`Select ${g === "M" ? "male" : "female"} gender`}
+                    accessibilityRole="radio"
+                    accessibilityState={{ selected: formData.gender === g }}
                   >
                     <Text className={`text-center font-semibold ${formData.gender === g ? "text-white" : "text-foreground"}`}>
                       {g === "M" ? "Male" : "Female"}
@@ -116,9 +127,12 @@ export default function AddPatientScreen() {
               <TextInput
                 className="bg-background border border-border rounded-lg p-3 text-foreground"
                 placeholder="e.g., Jane Doe"
-                placeholderTextColor="#687076"
+                placeholderTextColor={colors.muted}
                 value={formData.parentName}
                 onChangeText={(text) => setFormData({ ...formData, parentName: text })}
+                accessibilityLabel="Parent or guardian name"
+                accessibilityHint="Enter the parent or guardian's name"
+                autoComplete="name"
               />
             </View>
 
@@ -128,10 +142,13 @@ export default function AddPatientScreen() {
               <TextInput
                 className="bg-background border border-border rounded-lg p-3 text-foreground"
                 placeholder="e.g., jane@example.com"
-                placeholderTextColor="#687076"
+                placeholderTextColor={colors.muted}
                 value={formData.parentEmail}
                 onChangeText={(text) => setFormData({ ...formData, parentEmail: text })}
                 keyboardType="email-address"
+                accessibilityLabel="Parent email"
+                accessibilityHint="Enter the parent or guardian's email"
+                autoComplete="email"
               />
             </View>
 
@@ -141,10 +158,13 @@ export default function AddPatientScreen() {
               <TextInput
                 className="bg-background border border-border rounded-lg p-3 text-foreground"
                 placeholder="e.g., +1-555-0123"
-                placeholderTextColor="#687076"
+                placeholderTextColor={colors.muted}
                 value={formData.parentPhone}
                 onChangeText={(text) => setFormData({ ...formData, parentPhone: text })}
                 keyboardType="phone-pad"
+                accessibilityLabel="Parent phone number"
+                accessibilityHint="Enter the parent or guardian's phone number"
+                autoComplete="tel"
               />
             </View>
 
@@ -154,11 +174,13 @@ export default function AddPatientScreen() {
               <TextInput
                 className="bg-background border border-border rounded-lg p-3 text-foreground"
                 placeholder="e.g., Asthma, eczema..."
-                placeholderTextColor="#687076"
+                placeholderTextColor={colors.muted}
                 value={formData.medicalHistory}
                 onChangeText={(text) => setFormData({ ...formData, medicalHistory: text })}
                 multiline
                 numberOfLines={3}
+                accessibilityLabel="Medical history"
+                accessibilityHint="Enter any known medical conditions"
               />
             </View>
 
@@ -168,11 +190,13 @@ export default function AddPatientScreen() {
               <TextInput
                 className="bg-background border border-border rounded-lg p-3 text-foreground"
                 placeholder="e.g., Peanuts, penicillin..."
-                placeholderTextColor="#687076"
+                placeholderTextColor={colors.muted}
                 value={formData.allergies}
                 onChangeText={(text) => setFormData({ ...formData, allergies: text })}
                 multiline
                 numberOfLines={3}
+                accessibilityLabel="Allergies"
+                accessibilityHint="Enter any known allergies"
               />
             </View>
 
@@ -182,11 +206,13 @@ export default function AddPatientScreen() {
               <TextInput
                 className="bg-background border border-border rounded-lg p-3 text-foreground"
                 placeholder="e.g., Albuterol inhaler..."
-                placeholderTextColor="#687076"
+                placeholderTextColor={colors.muted}
                 value={formData.currentMedications}
                 onChangeText={(text) => setFormData({ ...formData, currentMedications: text })}
                 multiline
                 numberOfLines={3}
+                accessibilityLabel="Current medications"
+                accessibilityHint="Enter any medications the patient is currently taking"
               />
             </View>
           </View>
@@ -197,6 +223,9 @@ export default function AddPatientScreen() {
               className="bg-primary rounded-lg p-4 items-center active:opacity-80"
               onPress={handleAddPatient}
               disabled={loading}
+              accessibilityLabel="Save patient record"
+              accessibilityRole="button"
+              accessibilityState={{ disabled: loading }}
             >
               <Text className="text-white font-semibold">{loading ? "Adding..." : "Add Patient"}</Text>
             </TouchableOpacity>
@@ -205,6 +234,9 @@ export default function AddPatientScreen() {
               className="bg-surface border border-border rounded-lg p-4 items-center active:opacity-80"
               onPress={() => router.back()}
               disabled={loading}
+              accessibilityLabel="Cancel and go back"
+              accessibilityRole="button"
+              accessibilityState={{ disabled: loading }}
             >
               <Text className="text-foreground font-semibold">Cancel</Text>
             </TouchableOpacity>

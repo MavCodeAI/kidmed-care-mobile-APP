@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ScrollView, Text, View, Pressable, TextInput } from "react-native";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { usePatient } from "@/lib/patient-context";
+import { useColors } from "@/hooks/use-colors";
 
 export default function PatientsScreen() {
   const router = useRouter();
   const { patients, getActivePatients, searchPatients } = usePatient();
+  const colors = useColors();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredPatients, setFilteredPatients] = useState(patients);
 
@@ -45,38 +47,43 @@ export default function PatientsScreen() {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
         <View className="p-6 gap-4">
           <View className="flex-row justify-between items-center">
-            <Text className="text-3xl font-bold text-foreground">Patients</Text>
+            <Text className="text-3xl font-bold text-foreground" accessibilityRole="header">Patients</Text>
             <Pressable
               onPress={handleAddPatient}
+              accessibilityLabel="Add new patient"
+              accessibilityRole="button"
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#0066cc" : "#007bff",
-                  paddingVertical: 8,
+                  backgroundColor: pressed ? colors.primary : colors.primary,
+                  paddingVertical: 10,
                   paddingHorizontal: 16,
-                  borderRadius: 6,
+                  borderRadius: 8,
                   opacity: pressed ? 0.8 : 1,
                 },
               ]}
             >
-              <Text className="text-sm font-semibold text-foreground">+ Add</Text>
+              <Text className="text-sm font-semibold text-white">+ Add</Text>
             </Pressable>
           </View>
 
           {/* Search Bar */}
           <TextInput
             placeholder="Search patients..."
-            placeholderTextColor="#6c757d"
+            placeholderTextColor={colors.muted}
             value={searchQuery}
             onChangeText={setSearchQuery}
+            accessibilityLabel="Search patients"
+            accessibilityHint="Type to search patients by name"
             style={{
-              backgroundColor: "#f8f9fa",
+              backgroundColor: colors.surface,
               borderWidth: 1,
-              borderColor: "#007bff",
+              borderColor: colors.primary,
               borderRadius: 8,
               paddingHorizontal: 12,
-              paddingVertical: 10,
-              color: "#212529",
-              fontSize: 14,
+              paddingVertical: 12,
+              color: colors.foreground,
+              fontSize: 16,
+              minHeight: 44,
             }}
           />
 
@@ -87,11 +94,14 @@ export default function PatientsScreen() {
                 <Pressable
                   key={patient.id}
                   onPress={() => handlePatientPress(patient.id)}
+                  accessibilityLabel={`Patient ${patient.name}, age ${getAgeString(patient.dateOfBirth)}`}
+                  accessibilityRole="button"
+                  accessibilityHint="View patient details"
                   style={({ pressed }) => [
                     {
-                      backgroundColor: pressed ? "#0056b3" : "#007bff",
+                      backgroundColor: pressed ? colors.primary : colors.surface,
                       borderWidth: 1,
-                      borderColor: "#007bff",
+                      borderColor: colors.primary,
                       borderRadius: 10,
                       padding: 14,
                       opacity: pressed ? 0.8 : 1,

@@ -3,11 +3,13 @@ import { useRouter } from "expo-router";
 import { useAuth } from "@/lib/auth-context";
 import { useSubscription } from "@/lib/subscription-context";
 import { ScreenContainer } from "@/components/screen-container";
+import { useColors } from "@/hooks/use-colors";
 
 export default function ProfileScreen() {
   const router = useRouter();
   const { user, logout } = useAuth();
   const subscription = useSubscription();
+  const colors = useColors();
 
   const handleLogout = async () => {
     await logout();
@@ -22,7 +24,7 @@ export default function ProfileScreen() {
     <ScreenContainer className="bg-background">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
         <View className="p-6 gap-6">
-          <Text className="text-3xl font-bold text-foreground">Profile</Text>
+          <Text className="text-3xl font-bold text-foreground" accessibilityRole="header">Profile</Text>
 
           {/* User Info Card */}
           <View className="bg-surface rounded-xl p-6 border border-primary gap-4">
@@ -30,13 +32,14 @@ export default function ProfileScreen() {
               style={{
                 width: 80,
                 height: 80,
-                backgroundColor: "#007bff",
+                backgroundColor: colors.primary,
                 borderRadius: 40,
                 alignItems: "center",
                 justifyContent: "center",
               }}
+              accessibilityLabel={`User avatar for ${user?.name || 'User'}`}
             >
-              <Text className="text-3xl font-bold text-foreground">
+              <Text className="text-3xl font-bold text-white">
                 {user?.name?.charAt(0).toUpperCase() || "U"}
               </Text>
             </View>
@@ -58,11 +61,13 @@ export default function ProfileScreen() {
 
             <Pressable
               onPress={handleSettings}
+              accessibilityLabel="Subscription and billing settings"
+              accessibilityRole="button"
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#0056b3" : "#007bff",
+                  backgroundColor: pressed ? colors.primary : colors.surface,
                   borderWidth: 1,
-                  borderColor: "#007bff",
+                  borderColor: colors.primary,
                   borderRadius: 10,
                   padding: 14,
                   opacity: pressed ? 0.8 : 1,
@@ -77,11 +82,13 @@ export default function ProfileScreen() {
 
             <Pressable
               onPress={() => router.push("/audit-trail" as any)}
+              accessibilityLabel="View audit trail"
+              accessibilityRole="button"
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#0056b3" : "#007bff",
+                  backgroundColor: pressed ? colors.primary : colors.surface,
                   borderWidth: 1,
-                  borderColor: "#007bff",
+                  borderColor: colors.primary,
                   borderRadius: 10,
                   padding: 14,
                   opacity: pressed ? 0.8 : 1,
@@ -96,11 +103,13 @@ export default function ProfileScreen() {
 
             <Pressable
               onPress={() => router.push("/offline-sync" as any)}
+              accessibilityLabel="Offline and sync settings"
+              accessibilityRole="button"
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#0056b3" : "#007bff",
+                  backgroundColor: pressed ? colors.primary : colors.surface,
                   borderWidth: 1,
-                  borderColor: "#007bff",
+                  borderColor: colors.primary,
                   borderRadius: 10,
                   padding: 14,
                   opacity: pressed ? 0.8 : 1,
@@ -137,17 +146,20 @@ export default function ProfileScreen() {
           {/* Logout Button */}
           <Pressable
             onPress={handleLogout}
+            accessibilityLabel="Logout from account"
+            accessibilityRole="button"
+            accessibilityHint="Sign out of your account"
             style={({ pressed }) => [
               {
-                backgroundColor: pressed ? "#cc0000" : "#ff0000",
-                paddingVertical: 12,
+                backgroundColor: pressed ? colors.error : colors.error,
+                paddingVertical: 14,
                 paddingHorizontal: 16,
                 borderRadius: 8,
                 opacity: pressed ? 0.8 : 1,
               },
             ]}
           >
-            <Text className="text-base font-semibold text-foreground text-center">🚪 Logout</Text>
+            <Text className="text-base font-semibold text-white text-center">🚪 Logout</Text>
           </Pressable>
 
           <View className="h-6" />

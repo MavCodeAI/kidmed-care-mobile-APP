@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useRouter, Link } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { useAuth } from "@/lib/auth-context";
+import { useColors } from "@/hooks/use-colors";
 
 export default function LoginScreen() {
   const router = useRouter();
   const { login } = useAuth();
+  const colors = useColors();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -44,12 +46,15 @@ export default function LoginScreen() {
             <TextInput
               className="bg-surface border border-border rounded-lg p-4 text-foreground"
               placeholder="your@email.com"
-              placeholderTextColor="#687076"
+              placeholderTextColor={colors.muted}
               value={email}
               onChangeText={setEmail}
               editable={!isLoading}
               keyboardType="email-address"
               autoCapitalize="none"
+              accessibilityLabel="Email address"
+              accessibilityHint="Enter your email address"
+              autoComplete="email"
             />
           </View>
 
@@ -59,16 +64,23 @@ export default function LoginScreen() {
             <TextInput
               className="bg-surface border border-border rounded-lg p-4 text-foreground"
               placeholder="••••••••"
-              placeholderTextColor="#687076"
+              placeholderTextColor={colors.muted}
               value={password}
               onChangeText={setPassword}
               editable={!isLoading}
               secureTextEntry
+              accessibilityLabel="Password"
+              accessibilityHint="Enter your password"
+              autoComplete="password"
             />
           </View>
 
           {/* Forgot Password */}
-          <TouchableOpacity disabled={isLoading}>
+          <TouchableOpacity 
+            disabled={isLoading}
+            accessibilityLabel="Forgot password"
+            accessibilityRole="link"
+          >
             <Text className="text-sm text-primary font-semibold">Forgot Password?</Text>
           </TouchableOpacity>
 
@@ -77,6 +89,9 @@ export default function LoginScreen() {
             className="bg-primary rounded-lg p-4 items-center active:opacity-80"
             onPress={handleLogin}
             disabled={isLoading}
+            accessibilityLabel="Sign in to account"
+            accessibilityRole="button"
+            accessibilityState={{ disabled: isLoading }}
           >
             <Text className="text-white font-semibold">{isLoading ? "Signing In..." : "Sign In"}</Text>
           </TouchableOpacity>
@@ -90,10 +105,18 @@ export default function LoginScreen() {
 
           {/* Social Login */}
           <View className="gap-3">
-            <TouchableOpacity className="bg-surface border border-border rounded-lg p-4 items-center active:opacity-80">
+            <TouchableOpacity 
+              className="bg-surface border border-border rounded-lg p-4 items-center active:opacity-80"
+              accessibilityLabel="Continue with Google"
+              accessibilityRole="button"
+            >
               <Text className="text-foreground font-semibold">Continue with Google</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="bg-surface border border-border rounded-lg p-4 items-center active:opacity-80">
+            <TouchableOpacity 
+              className="bg-surface border border-border rounded-lg p-4 items-center active:opacity-80"
+              accessibilityLabel="Continue with Apple"
+              accessibilityRole="button"
+            >
               <Text className="text-foreground font-semibold">Continue with Apple</Text>
             </TouchableOpacity>
           </View>
@@ -102,7 +125,7 @@ export default function LoginScreen() {
           <View className="flex-row justify-center gap-1">
             <Text className="text-sm text-muted">Don't have an account?</Text>
             <Link href="./signup" asChild>
-              <TouchableOpacity disabled={isLoading}>
+              <TouchableOpacity disabled={isLoading} accessibilityLabel="Sign up for new account" accessibilityRole="link">
                 <Text className="text-sm text-primary font-semibold">Sign Up</Text>
               </TouchableOpacity>
             </Link>
