@@ -69,7 +69,7 @@ export default function DecisionTreesScreen() {
 
               {step === 1 && (
                 <View className="gap-4">
-                  <Text className="text-base text-foreground">What is the child's age?</Text>
+                  <Text className="text-base text-foreground">What is the child&apos;s age?</Text>
                   <View className="flex-row gap-2">
                     <TouchableOpacity className="bg-primary p-3 rounded flex-1" onPress={() => answerQuestion("<2 years")}>
                       <Text className="text-white text-center">{"<2 years"}</Text>

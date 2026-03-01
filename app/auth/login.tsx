@@ -123,7 +123,7 @@ export default function LoginScreen() {
 
           {/* Sign Up Link */}
           <View className="flex-row justify-center gap-1">
-            <Text className="text-sm text-muted">Don't have an account?</Text>
+            <Text className="text-sm text-muted">Don&apos;t have an account?</Text>
             <Link href="./signup" asChild>
               <TouchableOpacity disabled={isLoading} accessibilityLabel="Sign up for new account" accessibilityRole="link">
                 <Text className="text-sm text-primary font-semibold">Sign Up</Text>

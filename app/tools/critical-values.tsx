@@ -252,7 +252,7 @@ export default function CriticalValuesScreen() {
               • Critical values require immediate physician notification{"\n"}
               • Document notification time and person notified{"\n"}
               • Critical values may vary by institution{"\n"}
-              • Always follow your facility's critical value policy{"\n"}
+              • Always follow your facility&apos;s critical value policy{"\n"}
               • Age-specific values may apply for pediatric patients
             </Text>
           </View>
@@ -284,7 +284,7 @@ export default function CriticalValuesScreen() {
               <View className="flex-row gap-2 items-start">
                 <Text className="text-primary font-bold">4.</Text>
                 <Text className="text-sm text-muted flex-1">
-                  Follow physician's orders for management
+                  Follow physician&apos;s orders for management
                 </Text>
               </View>
               <View className="flex-row gap-2 items-start">
