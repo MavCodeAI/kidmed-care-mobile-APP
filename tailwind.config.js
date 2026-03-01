@@ -22,6 +22,19 @@ module.exports = {
   theme: {
     extend: {
       colors: tailwindColors,
+      backgroundColor: {
+        dark: "#0a0a0a",
+        "dark-surface": "#0f0f0f",
+        "dark-card": "#1a1a1a",
+      },
+      textColor: {
+        "neon-green": "#00ff00",
+        "neon-green-dark": "#00dd00",
+      },
+      borderColor: {
+        "neon-green": "#00ff00",
+        "neon-green-dark": "#00dd00",
+      },
     },
   },
   plugins: [

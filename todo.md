@@ -303,3 +303,18 @@
 - [ ] Write offline/sync tests
 - [ ] Conduct end-to-end testing
 - [ ] Performance testing
+
+
+## Neon Green + Dark Theme Implementation
+- [ ] Update theme.config.js with neon green colors
+- [ ] Apply dark background to all screens
+- [ ] Update primary color to neon green (#00ff00)
+- [ ] Apply theme to home screen
+- [ ] Apply theme to tools screen
+- [ ] Apply theme to patients screen
+- [ ] Apply theme to messages screen
+- [ ] Apply theme to profile screen
+- [ ] Update buttons with neon green accent
+- [ ] Update card backgrounds with dark theme
+- [ ] Apply theme to all modal/dialog screens
+- [ ] Test theme consistency across all screens

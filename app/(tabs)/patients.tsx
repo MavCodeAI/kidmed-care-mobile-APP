@@ -1,5 +1,5 @@
-import { ScrollView, Text, View, Pressable, TextInput } from "react-native";
 import { useState, useEffect } from "react";
+import { ScrollView, Text, View, Pressable, TextInput } from "react-native";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { usePatient } from "@/lib/patient-context";
@@ -41,99 +41,80 @@ export default function PatientsScreen() {
   };
 
   return (
-    <ScreenContainer className="bg-background">
+    <ScreenContainer className="bg-black">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
         <View className="p-6 gap-4">
-          {/* Header */}
-          <View className="flex-row items-center justify-between">
-            <View className="gap-1">
-              <Text className="text-2xl font-bold text-foreground">Patients</Text>
-              <Text className="text-sm text-muted">{filteredPatients.length} active patients</Text>
-            </View>
+          <View className="flex-row justify-between items-center">
+            <Text className="text-3xl font-bold text-white">Patients</Text>
             <Pressable
               onPress={handleAddPatient}
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#0a6a8f" : "#0a7ea4",
-                  borderRadius: 50,
-                  padding: 12,
+                  backgroundColor: pressed ? "#00dd00" : "#00ff00",
+                  paddingVertical: 8,
+                  paddingHorizontal: 16,
+                  borderRadius: 6,
                   opacity: pressed ? 0.8 : 1,
                 },
               ]}
             >
-              <Text className="text-white text-xl font-bold">+</Text>
+              <Text className="text-sm font-semibold text-black">+ Add</Text>
             </Pressable>
           </View>
 
           {/* Search Bar */}
-          <View className="bg-surface rounded-lg border border-border p-3 flex-row items-center gap-2">
-            <Text className="text-lg text-muted">🔍</Text>
-            <TextInput
-              className="flex-1 text-foreground"
-              placeholder="Search by name or parent..."
-              placeholderTextColor="#687076"
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-            />
-          </View>
+          <TextInput
+            placeholder="Search patients..."
+            placeholderTextColor="#666666"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            style={{
+              backgroundColor: "#1a1a1a",
+              borderWidth: 1,
+              borderColor: "#00ff00",
+              borderRadius: 8,
+              paddingHorizontal: 12,
+              paddingVertical: 10,
+              color: "#ffffff",
+              fontSize: 14,
+            }}
+          />
 
-          {/* Patients List */}
-          {filteredPatients.length > 0 ? (
-            <View className="gap-3">
-              {filteredPatients.map((patient) => (
+          {/* Patient List */}
+          <View className="gap-3">
+            {filteredPatients.length > 0 ? (
+              filteredPatients.map((patient) => (
                 <Pressable
                   key={patient.id}
                   onPress={() => handlePatientPress(patient.id)}
                   style={({ pressed }) => [
                     {
-                      backgroundColor: pressed ? "#e8e8e8" : "#f5f5f5",
-                      borderRadius: 12,
-                      padding: 16,
+                      backgroundColor: pressed ? "#0f3a0f" : "#0a2a0a",
                       borderWidth: 1,
-                      borderColor: "#E5E7EB",
-                      opacity: pressed ? 0.7 : 1,
+                      borderColor: "#00ff00",
+                      borderRadius: 10,
+                      padding: 14,
+                      opacity: pressed ? 0.8 : 1,
                     },
                   ]}
                 >
                   <View className="flex-row justify-between items-start">
                     <View className="flex-1">
-                      <Text className="text-base font-semibold text-foreground">
-                        {patient.name}
-                      </Text>
-                      <Text className="text-xs text-muted mt-1">
-                        Age: {getAgeString(patient.dateOfBirth)} | {patient.gender}
-                      </Text>
-                      <Text className="text-xs text-muted mt-1">
-                        Parent: {patient.parentName}
+                      <Text className="text-base font-semibold text-green-500">{patient.name}</Text>
+                      <Text className="text-xs text-gray-400 mt-1">
+                        Age: {getAgeString(patient.dateOfBirth)} | DOB: {patient.dateOfBirth}
                       </Text>
                     </View>
-                    <Text className="text-lg">→</Text>
+                    <Text className="text-green-500 text-lg">→</Text>
                   </View>
                 </Pressable>
-              ))}
-            </View>
-          ) : (
-            <View className="bg-surface rounded-xl border border-border p-8 items-center justify-center gap-3">
-              <Text className="text-lg font-semibold text-foreground">No Patients Yet</Text>
-              <Text className="text-sm text-muted text-center">
-                Add your first patient to get started with clinical assessments
-              </Text>
-              <Pressable
-                onPress={handleAddPatient}
-                style={({ pressed }) => [
-                  {
-                    backgroundColor: pressed ? "#0a6a8f" : "#0a7ea4",
-                    borderRadius: 8,
-                    paddingHorizontal: 24,
-                    paddingVertical: 12,
-                    opacity: pressed ? 0.8 : 1,
-                  },
-                ]}
-              >
-                <Text className="text-white text-sm font-semibold">Add Patient</Text>
-              </Pressable>
-            </View>
-          )}
+              ))
+            ) : (
+              <View className="bg-gray-900 rounded-xl p-8 items-center">
+                <Text className="text-gray-400 text-center">No patients yet. Add your first patient to get started.</Text>
+              </View>
+            )}
+          </View>
         </View>
       </ScrollView>
     </ScreenContainer>
