@@ -41,16 +41,16 @@ export default function PatientsScreen() {
   };
 
   return (
-    <ScreenContainer className="bg-black">
+    <ScreenContainer className="bg-background">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
         <View className="p-6 gap-4">
           <View className="flex-row justify-between items-center">
-            <Text className="text-3xl font-bold text-white">Patients</Text>
+            <Text className="text-3xl font-bold text-foreground">Patients</Text>
             <Pressable
               onPress={handleAddPatient}
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#00dd00" : "#00ff00",
+                  backgroundColor: pressed ? "#0066cc" : "#007bff",
                   paddingVertical: 8,
                   paddingHorizontal: 16,
                   borderRadius: 6,
@@ -58,24 +58,24 @@ export default function PatientsScreen() {
                 },
               ]}
             >
-              <Text className="text-sm font-semibold text-black">+ Add</Text>
+              <Text className="text-sm font-semibold text-foreground">+ Add</Text>
             </Pressable>
           </View>
 
           {/* Search Bar */}
           <TextInput
             placeholder="Search patients..."
-            placeholderTextColor="#666666"
+            placeholderTextColor="#6c757d"
             value={searchQuery}
             onChangeText={setSearchQuery}
             style={{
-              backgroundColor: "#1a1a1a",
+              backgroundColor: "#f8f9fa",
               borderWidth: 1,
-              borderColor: "#00ff00",
+              borderColor: "#007bff",
               borderRadius: 8,
               paddingHorizontal: 12,
               paddingVertical: 10,
-              color: "#ffffff",
+              color: "#212529",
               fontSize: 14,
             }}
           />
@@ -89,9 +89,9 @@ export default function PatientsScreen() {
                   onPress={() => handlePatientPress(patient.id)}
                   style={({ pressed }) => [
                     {
-                      backgroundColor: pressed ? "#0f3a0f" : "#0a2a0a",
+                      backgroundColor: pressed ? "#0056b3" : "#007bff",
                       borderWidth: 1,
-                      borderColor: "#00ff00",
+                      borderColor: "#007bff",
                       borderRadius: 10,
                       padding: 14,
                       opacity: pressed ? 0.8 : 1,
@@ -100,18 +100,18 @@ export default function PatientsScreen() {
                 >
                   <View className="flex-row justify-between items-start">
                     <View className="flex-1">
-                      <Text className="text-base font-semibold text-green-500">{patient.name}</Text>
-                      <Text className="text-xs text-gray-400 mt-1">
+                      <Text className="text-base font-semibold text-primary">{patient.name}</Text>
+                      <Text className="text-xs text-muted mt-1">
                         Age: {getAgeString(patient.dateOfBirth)} | DOB: {patient.dateOfBirth}
                       </Text>
                     </View>
-                    <Text className="text-green-500 text-lg">→</Text>
+                    <Text className="text-primary text-lg">→</Text>
                   </View>
                 </Pressable>
               ))
             ) : (
               <View className="bg-gray-900 rounded-xl p-8 items-center">
-                <Text className="text-gray-400 text-center">No patients yet. Add your first patient to get started.</Text>
+                <Text className="text-muted text-center">No patients yet. Add your first patient to get started.</Text>
               </View>
             )}
           </View>

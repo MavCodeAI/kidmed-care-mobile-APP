@@ -1,6 +1,8 @@
 import { ScrollView, Text, View, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
+import { Colors } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 
 const CLINICAL_TOOLS = [
   { id: "1", name: "BMI Calculator", route: "/tools/bmi-calculator" },
@@ -18,32 +20,34 @@ const FEATURES = [
 
 export default function HomeScreen() {
   const router = useRouter();
+  const scheme = useColorScheme();
+  const primaryColor = Colors[scheme].primary;
 
   return (
-    <ScreenContainer className="bg-black">
+    <ScreenContainer className="bg-background">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
         <View className="p-6 gap-6">
           {/* Header */}
           <View className="gap-2">
-            <Text className="text-4xl font-bold text-white">KidMed Care</Text>
-            <Text className="text-sm text-gray-400">Pediatric Clinical Decision Support</Text>
+            <Text className="text-4xl font-bold text-foreground">KidMed Care</Text>
+            <Text className="text-sm text-muted">Pediatric Clinical Decision Support</Text>
           </View>
 
           {/* Quick Stats */}
           <View className="flex-row gap-3">
-            <View className="flex-1 bg-gray-900 rounded-xl p-4 border border-green-500">
-              <Text className="text-2xl font-bold text-green-500">0</Text>
-              <Text className="text-xs text-gray-400 mt-1">Patients Today</Text>
+            <View className="flex-1 bg-surface rounded-xl p-4 border border-primary">
+              <Text className="text-2xl font-bold text-primary">0</Text>
+              <Text className="text-xs text-muted mt-1">Patients Today</Text>
             </View>
-            <View className="flex-1 bg-gray-900 rounded-xl p-4 border border-green-500">
-              <Text className="text-2xl font-bold text-green-500">0</Text>
-              <Text className="text-xs text-gray-400 mt-1">Pending Cases</Text>
+            <View className="flex-1 bg-surface rounded-xl p-4 border border-primary">
+              <Text className="text-2xl font-bold text-primary">0</Text>
+              <Text className="text-xs text-muted mt-1">Pending Cases</Text>
             </View>
           </View>
 
           {/* Quick Access Tools */}
           <View className="gap-3">
-            <Text className="text-lg font-semibold text-white">Quick Access</Text>
+            <Text className="text-lg font-semibold text-foreground">Quick Access</Text>
             <View className="flex-row flex-wrap gap-2">
               {CLINICAL_TOOLS.map((tool) => (
                 <Pressable
@@ -53,7 +57,7 @@ export default function HomeScreen() {
                     {
                       flex: 1,
                       minWidth: "48%",
-                      backgroundColor: pressed ? "#00dd00" : "#00ff00",
+                      backgroundColor: primaryColor,
                       paddingVertical: 12,
                       paddingHorizontal: 16,
                       borderRadius: 8,
@@ -61,7 +65,7 @@ export default function HomeScreen() {
                     },
                   ]}
                 >
-                  <Text className="text-sm font-semibold text-black text-center">{tool.name}</Text>
+                  <Text className="text-sm font-semibold text-foreground text-center">{tool.name}</Text>
                 </Pressable>
               ))}
             </View>
@@ -69,7 +73,7 @@ export default function HomeScreen() {
 
           {/* Features Section */}
           <View className="gap-3">
-            <Text className="text-lg font-semibold text-white">Features</Text>
+            <Text className="text-lg font-semibold text-foreground">Features</Text>
             <View className="flex-row flex-wrap gap-2">
               {FEATURES.map((feature) => (
                 <Pressable
@@ -79,17 +83,17 @@ export default function HomeScreen() {
                     {
                       flex: 1,
                       minWidth: "48%",
-                      backgroundColor: pressed ? "#1a6b1a" : "#1a7a1a",
+                      backgroundColor: primaryColor,
                       paddingVertical: 12,
                       paddingHorizontal: 16,
                       borderRadius: 8,
                       borderWidth: 1,
-                      borderColor: "#00ff00",
+                      borderColor: primaryColor,
                       opacity: pressed ? 0.8 : 1,
                     },
                   ]}
                 >
-                  <Text className="text-sm font-semibold text-green-500 text-center">{feature.name}</Text>
+                  <Text className="text-sm font-semibold text-foreground text-center">{feature.name}</Text>
                 </Pressable>
               ))}
             </View>
@@ -100,31 +104,31 @@ export default function HomeScreen() {
             onPress={() => router.push("/ai-guidance")}
             style={({ pressed }) => [
               {
-                backgroundColor: pressed ? "#0f3a0f" : "#0a2a0a",
+                backgroundColor: primaryColor,
                 borderWidth: 1,
-                borderColor: "#00ff00",
+                borderColor: primaryColor,
                 borderRadius: 12,
                 padding: 16,
                 opacity: pressed ? 0.8 : 1,
               },
             ]}
           >
-            <Text className="text-base font-semibold text-green-500 mb-2">🤖 AI Clinical Guidance</Text>
-            <Text className="text-sm text-gray-300 mb-4">Evidence-based recommendations</Text>
-            <View className="bg-green-500 rounded-lg px-4 py-2 self-start">
-              <Text className="text-sm font-semibold text-black">Access</Text>
+            <Text className="text-base font-semibold text-foreground mb-2">🤖 AI Clinical Guidance</Text>
+            <Text className="text-sm text-muted mb-4">Evidence-based recommendations</Text>
+            <View className="bg-primary rounded-lg px-4 py-2 self-start">
+              <Text className="text-sm font-semibold text-foreground">Access</Text>
             </View>
           </Pressable>
 
           {/* Subscription Status */}
-          <View className="bg-gray-900 rounded-xl p-4 border border-yellow-500">
-            <Text className="text-base font-semibold text-white mb-2">Free Plan</Text>
-            <Text className="text-sm text-gray-400 mb-3">Upgrade to unlock all tools</Text>
+          <View className="bg-surface rounded-xl p-4 border border-warning">
+            <Text className="text-base font-semibold text-foreground mb-2">Free Plan</Text>
+            <Text className="text-sm text-muted mb-3">Upgrade to unlock all tools</Text>
             <Pressable
               onPress={() => router.push("/subscription-management")}
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#0066cc" : "#0077dd",
+                  backgroundColor: primaryColor,
                   paddingVertical: 10,
                   paddingHorizontal: 16,
                   borderRadius: 6,
@@ -132,15 +136,15 @@ export default function HomeScreen() {
                 },
               ]}
             >
-              <Text className="text-sm font-semibold text-white text-center">Upgrade</Text>
+              <Text className="text-sm font-semibold text-foreground text-center">Upgrade</Text>
             </Pressable>
           </View>
 
           {/* Recent Patients */}
           <View className="gap-3">
-            <Text className="text-lg font-semibold text-white">Recent Patients</Text>
-            <View className="bg-gray-900 rounded-xl p-4 border border-gray-700">
-              <Text className="text-sm text-gray-400 text-center">No patients yet</Text>
+            <Text className="text-lg font-semibold text-foreground">Recent Patients</Text>
+            <View className="bg-surface rounded-xl p-4 border border-border">
+              <Text className="text-sm text-muted text-center">No patients yet</Text>
             </View>
           </View>
         </View>

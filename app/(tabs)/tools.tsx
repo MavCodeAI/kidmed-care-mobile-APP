@@ -20,11 +20,11 @@ export default function ToolsScreen() {
   const router = useRouter();
 
   return (
-    <ScreenContainer className="bg-black">
+    <ScreenContainer className="bg-background">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
         <View className="p-6 gap-4">
-          <Text className="text-3xl font-bold text-white">Clinical Tools</Text>
-          <Text className="text-sm text-gray-400">13 evidence-based pediatric tools</Text>
+          <Text className="text-3xl font-bold text-foreground">Clinical Tools</Text>
+          <Text className="text-sm text-muted">13 evidence-based pediatric tools</Text>
           
           <View className="gap-3 mt-2">
             {TOOLS.map((tool) => (
@@ -33,9 +33,9 @@ export default function ToolsScreen() {
                 onPress={() => router.push(tool.route as any)}
                 style={({ pressed }) => [
                   {
-                    backgroundColor: pressed ? "#0f3a0f" : "#0a2a0a",
+                    backgroundColor: pressed ? "#0056b3" : "#007bff",
                     borderWidth: 1,
-                    borderColor: "#00ff00",
+                    borderColor: "#007bff",
                     borderRadius: 10,
                     padding: 14,
                     opacity: pressed ? 0.8 : 1,
@@ -44,10 +44,10 @@ export default function ToolsScreen() {
               >
                 <View className="flex-row justify-between items-start">
                   <View className="flex-1">
-                    <Text className="text-base font-semibold text-green-500">{tool.name}</Text>
-                    <Text className="text-xs text-gray-400 mt-1">{tool.desc}</Text>
+                    <Text className="text-base font-semibold text-primary">{tool.name}</Text>
+                    <Text className="text-xs text-muted mt-1">{tool.desc}</Text>
                   </View>
-                  <Text className="text-green-500 text-lg">→</Text>
+                  <Text className="text-primary text-lg">→</Text>
                 </View>
               </Pressable>
             ))}

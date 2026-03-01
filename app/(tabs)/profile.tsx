@@ -19,50 +19,50 @@ export default function ProfileScreen() {
   };
 
   return (
-    <ScreenContainer className="bg-black">
+    <ScreenContainer className="bg-background">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
         <View className="p-6 gap-6">
-          <Text className="text-3xl font-bold text-white">Profile</Text>
+          <Text className="text-3xl font-bold text-foreground">Profile</Text>
 
           {/* User Info Card */}
-          <View className="bg-gray-900 rounded-xl p-6 border border-green-500 gap-4">
+          <View className="bg-surface rounded-xl p-6 border border-primary gap-4">
             <View
               style={{
                 width: 80,
                 height: 80,
-                backgroundColor: "#00ff00",
+                backgroundColor: "#007bff",
                 borderRadius: 40,
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <Text className="text-3xl font-bold text-black">
+              <Text className="text-3xl font-bold text-foreground">
                 {user?.name?.charAt(0).toUpperCase() || "U"}
               </Text>
             </View>
 
             <View>
-              <Text className="text-xl font-bold text-white">{user?.name || "User"}</Text>
-              <Text className="text-sm text-gray-400 mt-1">{user?.email || "No email"}</Text>
+              <Text className="text-xl font-bold text-foreground">{user?.name || "User"}</Text>
+              <Text className="text-sm text-muted mt-1">{user?.email || "No email"}</Text>
             </View>
 
-            <View className="bg-gray-800 rounded-lg p-3 mt-2">
-              <Text className="text-xs text-gray-400 mb-1">Subscription Tier</Text>
-              <Text className="text-base font-semibold text-green-500 capitalize">Free</Text>
+            <View className="bg-surface rounded-lg p-3 mt-2">
+              <Text className="text-xs text-muted mb-1">Subscription Tier</Text>
+              <Text className="text-base font-semibold text-primary capitalize">Free</Text>
             </View>
           </View>
 
           {/* Settings Section */}
           <View className="gap-3">
-            <Text className="text-lg font-semibold text-white">Settings</Text>
+            <Text className="text-lg font-semibold text-foreground">Settings</Text>
 
             <Pressable
               onPress={handleSettings}
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#0f3a0f" : "#0a2a0a",
+                  backgroundColor: pressed ? "#0056b3" : "#007bff",
                   borderWidth: 1,
-                  borderColor: "#00ff00",
+                  borderColor: "#007bff",
                   borderRadius: 10,
                   padding: 14,
                   opacity: pressed ? 0.8 : 1,
@@ -70,8 +70,8 @@ export default function ProfileScreen() {
               ]}
             >
               <View className="flex-row justify-between items-center">
-                <Text className="text-base font-semibold text-green-500">⚙️ Subscription & Billing</Text>
-                <Text className="text-green-500">→</Text>
+                <Text className="text-base font-semibold text-primary">⚙️ Subscription & Billing</Text>
+                <Text className="text-primary">→</Text>
               </View>
             </Pressable>
 
@@ -79,9 +79,9 @@ export default function ProfileScreen() {
               onPress={() => router.push("/audit-trail" as any)}
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#0f3a0f" : "#0a2a0a",
+                  backgroundColor: pressed ? "#0056b3" : "#007bff",
                   borderWidth: 1,
-                  borderColor: "#00ff00",
+                  borderColor: "#007bff",
                   borderRadius: 10,
                   padding: 14,
                   opacity: pressed ? 0.8 : 1,
@@ -89,8 +89,8 @@ export default function ProfileScreen() {
               ]}
             >
               <View className="flex-row justify-between items-center">
-                <Text className="text-base font-semibold text-green-500">📋 Audit Trail</Text>
-                <Text className="text-green-500">→</Text>
+                <Text className="text-base font-semibold text-primary">📋 Audit Trail</Text>
+                <Text className="text-primary">→</Text>
               </View>
             </Pressable>
 
@@ -98,9 +98,9 @@ export default function ProfileScreen() {
               onPress={() => router.push("/offline-sync" as any)}
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? "#0f3a0f" : "#0a2a0a",
+                  backgroundColor: pressed ? "#0056b3" : "#007bff",
                   borderWidth: 1,
-                  borderColor: "#00ff00",
+                  borderColor: "#007bff",
                   borderRadius: 10,
                   padding: 14,
                   opacity: pressed ? 0.8 : 1,
@@ -108,28 +108,28 @@ export default function ProfileScreen() {
               ]}
             >
               <View className="flex-row justify-between items-center">
-                <Text className="text-base font-semibold text-green-500">🔄 Offline & Sync</Text>
-                <Text className="text-green-500">→</Text>
+                <Text className="text-base font-semibold text-primary">🔄 Offline & Sync</Text>
+                <Text className="text-primary">→</Text>
               </View>
             </Pressable>
           </View>
 
           {/* About Section */}
           <View className="gap-3">
-            <Text className="text-lg font-semibold text-white">About</Text>
+            <Text className="text-lg font-semibold text-foreground">About</Text>
 
-            <View className="bg-gray-900 rounded-xl p-4 border border-gray-700 gap-2">
+            <View className="bg-surface rounded-xl p-4 border border-border gap-2">
               <View className="flex-row justify-between">
-                <Text className="text-sm text-gray-400">App Version</Text>
-                <Text className="text-sm font-semibold text-white">1.0.0</Text>
+                <Text className="text-sm text-muted">App Version</Text>
+                <Text className="text-sm font-semibold text-foreground">1.0.0</Text>
               </View>
               <View className="flex-row justify-between">
-                <Text className="text-sm text-gray-400">Last Updated</Text>
-                <Text className="text-sm font-semibold text-white">Today</Text>
+                <Text className="text-sm text-muted">Last Updated</Text>
+                <Text className="text-sm font-semibold text-foreground">Today</Text>
               </View>
               <View className="flex-row justify-between">
-                <Text className="text-sm text-gray-400">Platform</Text>
-                <Text className="text-sm font-semibold text-white">Expo</Text>
+                <Text className="text-sm text-muted">Platform</Text>
+                <Text className="text-sm font-semibold text-foreground">Expo</Text>
               </View>
             </View>
           </View>
@@ -147,7 +147,7 @@ export default function ProfileScreen() {
               },
             ]}
           >
-            <Text className="text-base font-semibold text-white text-center">🚪 Logout</Text>
+            <Text className="text-base font-semibold text-foreground text-center">🚪 Logout</Text>
           </Pressable>
 
           <View className="h-6" />

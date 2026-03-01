@@ -1,16 +1,19 @@
-import { ScrollView, Text, View, TouchableOpacity, FlatList } from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, FlatList, TextInput } from "react-native";
 import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { useClinicalTools } from "@/lib/clinical-tools-context";
 import { useSubscription } from "@/lib/subscription-context";
 import { useAuth } from "@/lib/auth-context";
+import { Colors } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 
 export default function ToolsHubScreen() {
   const router = useRouter();
   const { getAllTools, getToolsByTier } = useClinicalTools();
   const { user } = useAuth();
   const { hasFeature } = useSubscription();
+  const scheme = useColorScheme();
   const [tools, setTools] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -29,17 +32,17 @@ export default function ToolsHubScreen() {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "calculator":
-        return "bg-blue-100 border-blue-200";
+        return "bg-primary/20 border-primary/50";
       case "assessment":
-        return "bg-purple-100 border-purple-200";
+        return "bg-accent/20 border-accent/50";
       case "reference":
-        return "bg-green-100 border-green-200";
+        return "bg-success/20 border-success/50";
       case "scheduler":
-        return "bg-orange-100 border-orange-200";
+        return "bg-warning/20 border-warning/50";
       case "screening":
-        return "bg-red-100 border-red-200";
+        return "bg-error/20 border-error/50";
       default:
-        return "bg-gray-100 border-gray-200";
+        return "bg-muted/20 border-muted/50";
     }
   };
 
@@ -82,12 +85,23 @@ export default function ToolsHubScreen() {
             <Text className="text-sm text-muted">{tools.length} tools available in your plan</Text>
           </View>
 
+          {/* Search Bar */}
+          <TextInput
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            placeholder="Search tools..."
+            className="bg-surface rounded-lg p-3 border border-border text-foreground"
+            placeholderTextColor={Colors[scheme].muted}
+            style={{ color: Colors[scheme].foreground }}
+          />
+
           {/* Tools Grid */}
-          <View className="gap-3">
+          <View className="flex-row flex-wrap gap-3">
             {filteredTools.map((tool) => (
               <TouchableOpacity
                 key={tool.id}
                 className="bg-surface rounded-xl p-4 border border-border active:opacity-80"
+                style={{ flex: 1, minWidth: '48%' }}
                 onPress={() => handleToolPress(tool.id)}
               >
                 <View className="flex-row items-start gap-4">
