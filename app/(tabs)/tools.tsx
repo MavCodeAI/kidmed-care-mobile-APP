@@ -14,7 +14,12 @@ const TOOLS = [
   { id: "8", name: "Catch-up Vaccines", desc: "Missed vaccine planning", route: "/tools/catchup-vaccination", accessibilityLabel: "Catch-up Vaccines tool" },
   { id: "9", name: "Critical Values", desc: "Emergency lab thresholds", route: "/tools/critical-values", accessibilityLabel: "Critical Values reference tool" },
   { id: "10", name: "Pain Assessment", desc: "Pediatric pain scales", route: "/tools/pain-assessment", accessibilityLabel: "Pain Assessment tool" },
-  { id: "11", name: "Drug Dosing", desc: "Medication calculator", route: "/tools/drug-dosing", accessibilityLabel: "Drug Dosing calculator" },
+  { id: "12", name: "AI Prescription Writer", desc: "AI-powered prescription generator", route: "/tools/ai-prescription-writer", accessibilityLabel: "AI Prescription Writer tool" },
+  { id: "13", name: "Clinical Decision Trees", desc: "Interactive symptom flowcharts", route: "/tools/decision-trees", accessibilityLabel: "Clinical Decision Trees tool" },
+  { id: "14", name: "Drug Interaction Checker", desc: "Check medication interactions", route: "/tools/drug-interactions", accessibilityLabel: "Drug Interaction Checker tool" },
+  { id: "15", name: "Patient Handouts", desc: "PDF educational materials", route: "/tools/patient-handouts", accessibilityLabel: "Patient Handouts tool" },
+  { id: "16", name: "AI Clinical Summary", desc: "Automated visit summaries", route: "/tools/clinical-summary", accessibilityLabel: "AI Clinical Summary tool" },
+  { id: "17", name: "Compare & Explain", desc: "Compare diagnoses", route: "/tools/compare-diagnoses", accessibilityLabel: "Compare and Explain tool" },
 ];
 
 export default function ToolsScreen() {
@@ -26,7 +31,7 @@ export default function ToolsScreen() {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
         <View className="p-6 gap-4">
           <Text className="text-3xl font-bold text-foreground" accessibilityRole="header">Clinical Tools</Text>
-          <Text className="text-sm text-muted">13 evidence-based pediatric tools</Text>
+          <Text className="text-sm text-muted">19 evidence-based pediatric tools</Text>
           
           <View className="gap-3 mt-2">
             {TOOLS.map((tool) => (
