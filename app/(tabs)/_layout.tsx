@@ -39,7 +39,8 @@ export default function TabLayout() {
         name="tools"
         options={{
           title: "Tools",
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="chevron.right" color={color} />,
+          headerShown: true,
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="gear" color={color} />,
         }}
       />
       <Tabs.Screen
