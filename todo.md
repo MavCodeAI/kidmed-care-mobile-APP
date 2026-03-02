@@ -318,3 +318,16 @@
 - [ ] Update card backgrounds with dark theme
 - [ ] Apply theme to all modal/dialog screens
 - [ ] Test theme consistency across all screens
+
+
+## Missing Website Features Implementation
+- [ ] Build AI Prescription Writer tool
+- [ ] Create Clinical Decision Trees (Fever, Cough, Diarrhea, Rash)
+- [ ] Implement Drug Interaction Checker
+- [ ] Build Patient Handouts system with PDF generation
+- [ ] Create AI Clinical Summary generator
+- [ ] Implement Compare & Explain mode for diagnoses
+- [ ] Add Guideline Packs system
+- [ ] Create Medication Safety Layer
+- [ ] Build interactive flowchart UI components
+- [ ] Add PDF export functionality for prescriptions and summaries
