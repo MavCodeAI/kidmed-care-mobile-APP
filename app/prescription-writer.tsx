@@ -2,6 +2,7 @@ import { ScrollView, Text, View, Pressable, TextInput } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
+import { LucideIcon } from "@/components/lucide-icon";
 import { prescriptionWriterService } from "@/lib/prescription-writer-service";
 
 export default function PrescriptionWriterScreen() {
@@ -40,7 +41,10 @@ export default function PrescriptionWriterScreen() {
     <ScreenContainer className="bg-black">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
         <View className="p-6 gap-4">
-          <Text className="text-3xl font-bold text-white">℞ Prescription Writer</Text>
+          <View className="flex-row items-center gap-2">
+            <LucideIcon name="prescription" size={32} color="#00ff00" />
+            <Text className="text-3xl font-bold text-white">Prescription Writer</Text>
+          </View>
           <Text className="text-sm text-gray-400">AI-powered prescription generation</Text>
 
           {!prescription ? (
@@ -169,7 +173,10 @@ export default function PrescriptionWriterScreen() {
             <>
               {/* Prescription Display */}
               <View className="bg-gray-900 rounded-xl p-6 border border-green-500 gap-4 mt-4">
-                <Text className="text-xl font-bold text-green-500">℞ PRESCRIPTION</Text>
+                <View className="flex-row items-center gap-2">
+                  <LucideIcon name="prescription" size={24} color="#00ff00" />
+                  <Text className="text-xl font-bold text-green-500">PRESCRIPTION</Text>
+                </View>
 
                 <View className="gap-2">
                   <View className="flex-row justify-between">
@@ -198,14 +205,20 @@ export default function PrescriptionWriterScreen() {
                       <Text className="text-xs text-gray-400 mt-1">Dosage: {med.dosage}</Text>
                       <Text className="text-xs text-gray-400">Frequency: {med.frequency}</Text>
                       <Text className="text-xs text-gray-400">Duration: {med.duration}</Text>
-                      {med.instructions && <Text className="text-xs text-yellow-500 mt-1">💡 {med.instructions}</Text>}
+                      {med.instructions && (
+                        <View className="flex-row items-start gap-2 mt-1">
+                          <LucideIcon name="lightbulb" size={14} color="#eab308" />
+                          <Text className="text-xs text-yellow-500 flex-1">{med.instructions}</Text>
+                        </View>
+                      )}
                     </View>
                   ))}
                 </View>
 
-                <View className="bg-yellow-900 rounded-lg p-3 border border-yellow-600">
-                  <Text className="text-xs text-yellow-200">
-                    ⚠️ Disclaimer: This is a decision-support tool. All prescriptions must be reviewed by a clinician.
+                <View className="bg-yellow-900 rounded-lg p-3 border border-yellow-600 flex-row items-start gap-2">
+                  <LucideIcon name="alertTriangle" size={16} color="#fbbf24" />
+                  <Text className="text-xs text-yellow-200 flex-1">
+                    Disclaimer: This is a decision-support tool. All prescriptions must be reviewed by a clinician.
                   </Text>
                 </View>
               </View>
@@ -220,10 +233,15 @@ export default function PrescriptionWriterScreen() {
                       paddingVertical: 12,
                       borderRadius: 8,
                       opacity: pressed ? 0.8 : 1,
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: 8,
                     },
                   ]}
                 >
-                  <Text className="text-base font-semibold text-white text-center">📥 Export as PDF</Text>
+                  <LucideIcon name="download" size={20} color="#ffffff" />
+                  <Text className="text-base font-semibold text-white">Export as PDF</Text>
                 </Pressable>
 
                 <Pressable

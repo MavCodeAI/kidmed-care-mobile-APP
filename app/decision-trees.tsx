@@ -2,6 +2,7 @@ import { ScrollView, Text, View, Pressable } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
+import { LucideIcon } from "@/components/lucide-icon";
 import { decisionTreesService } from "@/lib/decision-trees-service";
 
 export default function DecisionTreesScreen() {
@@ -47,14 +48,25 @@ export default function DecisionTreesScreen() {
     }
   };
 
+  const getUrgencyIcon = (urgency: string) => {
+    switch (urgency) {
+      case "emergency":
+        return "alertTriangle";
+      case "urgent":
+        return "alertCircle";
+      default:
+        return "checkCircle";
+    }
+  };
+
   const getUrgencyLabel = (urgency: string) => {
     switch (urgency) {
       case "emergency":
-        return "🚨 EMERGENCY";
+        return "EMERGENCY";
       case "urgent":
-        return "⚠️ URGENT";
+        return "URGENT";
       default:
-        return "✓ ROUTINE";
+        return "ROUTINE";
     }
   };
 
@@ -63,7 +75,10 @@ export default function DecisionTreesScreen() {
       <ScreenContainer className="bg-black">
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
           <View className="p-6 gap-4">
-            <Text className="text-3xl font-bold text-white">Clinical Decision Trees</Text>
+            <View className="flex-row items-center gap-2">
+              <LucideIcon name="decisionTree" size={32} color="#00ff00" />
+              <Text className="text-3xl font-bold text-white">Clinical Decision Trees</Text>
+            </View>
             <Text className="text-sm text-gray-400">Interactive diagnostic flowcharts</Text>
 
             <View className="gap-3 mt-4">
@@ -87,7 +102,7 @@ export default function DecisionTreesScreen() {
                       <Text className="text-base font-semibold text-green-500">{tree.name}</Text>
                       <Text className="text-xs text-gray-400 mt-1">{tree.description}</Text>
                     </View>
-                    <Text className="text-green-500 text-lg">→</Text>
+                    <LucideIcon name="chevronRight" size={20} color="#00ff00" />
                   </View>
                 </Pressable>
               ))}
@@ -137,8 +152,12 @@ export default function DecisionTreesScreen() {
                   paddingVertical: 8,
                   paddingHorizontal: 12,
                   alignSelf: "flex-start",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 6,
                 }}
               >
+                <LucideIcon name={getUrgencyIcon(currentNode.urgency)} size={16} color="#000000" />
                 <Text className="text-xs font-bold text-black">{getUrgencyLabel(currentNode.urgency)}</Text>
               </View>
 
@@ -149,7 +168,10 @@ export default function DecisionTreesScreen() {
                 {/* Red Flags */}
                 {currentNode.redFlags && currentNode.redFlags.length > 0 && (
                   <View className="bg-red-900 rounded-lg p-4 border border-red-600">
-                    <Text className="text-sm font-semibold text-red-300 mb-2">🚩 Red Flags:</Text>
+                    <View className="flex-row items-center gap-2 mb-2">
+                      <LucideIcon name="flag" size={16} color="#fca5a5" />
+                      <Text className="text-sm font-semibold text-red-300">Red Flags:</Text>
+                    </View>
                     {currentNode.redFlags.map((flag: string, idx: number) => (
                       <Text key={idx} className="text-xs text-red-200 mb-1">
                         • {flag}
@@ -161,7 +183,10 @@ export default function DecisionTreesScreen() {
                 {/* Recommendations */}
                 {currentNode.recommendations && currentNode.recommendations.length > 0 && (
                   <View className="bg-green-900 rounded-lg p-4 border border-green-600">
-                    <Text className="text-sm font-semibold text-green-300 mb-2">💡 Recommendations:</Text>
+                    <View className="flex-row items-center gap-2 mb-2">
+                      <LucideIcon name="lightbulb" size={16} color="#86efac" />
+                      <Text className="text-sm font-semibold text-green-300">Recommendations:</Text>
+                    </View>
                     {currentNode.recommendations.map((rec: string, idx: number) => (
                       <Text key={idx} className="text-xs text-green-200 mb-1">
                         {rec}
@@ -198,7 +223,10 @@ export default function DecisionTreesScreen() {
               {/* Path Summary */}
               {path.length > 1 && (
                 <View className="bg-gray-900 rounded-xl p-4 border border-gray-700 gap-2">
-                  <Text className="text-xs font-semibold text-gray-400">Assessment Path:</Text>
+                  <View className="flex-row items-center gap-2 mb-2">
+                    <LucideIcon name="clipboard" size={16} color="#d1d5db" />
+                    <Text className="text-xs font-semibold text-gray-400">Assessment Path:</Text>
+                  </View>
                   {path.map((node: any, idx: number) => (
                     <Text key={idx} className="text-xs text-gray-300">
                       {idx + 1}. {node.question}
