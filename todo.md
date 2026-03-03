@@ -349,10 +349,16 @@
 - [x] Create success/confirmation screens with animations
 - [x] Create toast notifications with auto-dismiss
 - [x] Create HapticButton with integrated feedback
+- [x] Add premium dark mode with neon green accents
+- [x] Implement gesture-based interactions (swipe carousel)
+- [x] Add accessibility improvements (screen reader + keyboard)
+- [x] Create dark mode theme colors
+- [x] Create gesture handlers utility
+- [x] Create swipeable carousel component
+- [x] Create accessibility utilities
+- [x] Create accessible button component
+- [x] Create dark mode premium home screen
 - [ ] Optimize typography and spacing
-- [ ] Add premium dark mode with neon green accents
-- [ ] Implement gesture-based interactions
-- [ ] Add accessibility improvements
 
 ## Manual Payment Flow & UX Improvements
 - [x] Create manual payment screen with WhatsApp contact (03168076207)
