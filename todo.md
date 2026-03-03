@@ -331,3 +331,23 @@
 - [ ] Create Medication Safety Layer
 - [ ] Build interactive flowchart UI components
 - [ ] Add PDF export functionality for prescriptions and summaries
+
+## Manual Payment Flow & UX Improvements
+- [x] Create manual payment screen with WhatsApp contact (03168076207)
+- [ ] Add payment status tracking and history
+- [ ] Create invoice generation for manual payments
+- [ ] Fix UX issues in user flows
+- [ ] Optimize button sizes and spacing
+- [ ] Improve font hierarchy and readability
+- [ ] Add loading states to all screens
+- [ ] Implement error handling UI
+- [ ] Create success/confirmation screens
+- [ ] Add accessibility improvements
+
+## AI API Integration Setup
+- [x] Create API configuration service
+- [ ] Add environment variable setup for AI API keys
+- [x] Create API client with request/response handling
+- [x] Implement error handling for API calls
+- [x] Add retry logic for failed requests
+- [x] Create mock API responses for testing
