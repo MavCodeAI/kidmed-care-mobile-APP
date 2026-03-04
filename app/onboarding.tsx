@@ -1,13 +1,9 @@
-import { View, Text, Pressable, ScrollView } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import Animated, {
-  useAnimatedStyle,
   useSharedValue,
-  withTiming,
-  Easing,
   FadeIn,
-  FadeOut,
   SlideInRight,
   SlideOutLeft,
 } from "react-native-reanimated";
@@ -59,7 +55,6 @@ export default function OnboardingScreen() {
   const router = useRouter();
   const colors = useColors();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const progress = useSharedValue(0);
 
   const slide = ONBOARDING_SLIDES[currentSlide];
   const isLastSlide = currentSlide === ONBOARDING_SLIDES.length - 1;
@@ -79,9 +74,7 @@ export default function OnboardingScreen() {
     router.replace("/(tabs)");
   };
 
-  const progressStyle = useAnimatedStyle(() => ({
-    width: `${((currentSlide + 1) / ONBOARDING_SLIDES.length) * 100}%`,
-  }));
+
 
   return (
     <ScreenContainer className="bg-background">
@@ -90,10 +83,10 @@ export default function OnboardingScreen() {
         <View className="h-1 bg-surface rounded-full overflow-hidden">
           <Animated.View
             style={[
-              progressStyle,
               {
                 height: "100%",
                 backgroundColor: colors.primary,
+                width: `${((currentSlide + 1) / ONBOARDING_SLIDES.length) * 100}%`,
               },
             ]}
           />

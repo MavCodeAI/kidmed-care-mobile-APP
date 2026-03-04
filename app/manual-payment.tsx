@@ -53,7 +53,7 @@ export default function ManualPaymentScreen() {
     }
 
     const plan = SUBSCRIPTION_PLANS.find((p) => p.name === selectedPlan);
-    const message = `Hi! I'm interested in upgrading to the ${selectedPlan} plan (${plan?.price}${plan?.period}). Please assist with the manual payment process.`;
+    const message = `Hi! I&apos;m interested in upgrading to the ${selectedPlan} plan (${plan?.price}${plan?.period}). Please assist with the manual payment process.`;
 
     try {
       const encodedMessage = encodeURIComponent(message);
@@ -226,7 +226,7 @@ export default function ManualPaymentScreen() {
                 </View>
                 <View className="flex-1 gap-1">
                   <Text className="font-semibold text-foreground">Complete Payment</Text>
-                  <Text className="text-sm text-muted">We'll send you payment instructions</Text>
+                  <Text className="text-sm text-muted">We&apos;ll send you payment instructions</Text>
                 </View>
               </View>
               <View className="flex-row gap-3">

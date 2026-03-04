@@ -16,25 +16,14 @@ import { LucideIcon } from "@/components/lucide-icon";
 import { useColors } from "@/hooks/use-colors";
 import { hapticSuccess } from "@/lib/haptics";
 
-interface SuccessConfirmationProps {
-  title?: string;
-  message?: string;
-  icon?: string;
-  actionLabel?: string;
-  actionRoute?: string;
-}
-
 export default function SuccessConfirmationScreen() {
   const router = useRouter();
-  const colors = useColors();
   const scale = useSharedValue(0);
   const opacity = useSharedValue(0);
   const rotate = useSharedValue(0);
 
   useEffect(() => {
     hapticSuccess();
-
-    // Celebration animation
     scale.value = withSequence(
       withTiming(1.2, {
         duration: 400,
